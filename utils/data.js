@@ -74,7 +74,7 @@ const names = [
     'Parker',
   ];
   
-  const comments = [
+  const reactions = [
     'Decision Trackers are awesome',
     'Find My Phone is a useful app',
     'Learn Piano is not very good for learning Piano',
@@ -134,6 +134,16 @@ const names = [
   const getRandomUserName = () =>
     `${getRandomArrItem(names)}${Math.floor(Math.random() * 10 + 1)}`;
   
+  const getRandomAssignments = (int) => {
+    const results = [];
+    for (let i = 0; i < int; i++) {
+      results.push({
+        assignmentName: getRandomArrItem(appDescriptions),
+        score: Math.floor(Math.random() * (99 - 70 + 1) + 70),
+      });
+    }
+    return results;
+  };
   // Export the functions for use in seed.js
   module.exports = {
     getRandomName,
