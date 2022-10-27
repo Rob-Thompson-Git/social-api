@@ -1,6 +1,7 @@
 const connection = require('../config/connection');
 const User = require('../models/User');
-const { getRandomName, getRandomUserName } = require('./data');
+const Reaction = require('../models/Reaction')
+const { getRandomName, getRandomUserName, getRandomReaction } = require('./data');
 
 // Start the seeding runtime timer
 console.time('seeding');
@@ -11,12 +12,13 @@ connection.once('open', async () => {
   const users = [];
 
   for (let i = 0; i < 10; i++) {
-    const username = getRandomName();
+    const reactions = getRandomReaction([i]);
     const newUser = {
       username: getRandomUserName(),
-      email: `${username}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}@gmail.com`
+      email: `${username}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}@gmail.com`,
+      reaction: reactions,
     };
-    users.push(newUser);
+    users.push({newUser});
   }
 
   // Wait for the users to be inserted into the database
